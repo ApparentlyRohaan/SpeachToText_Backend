@@ -1,0 +1,6 @@
+github.com/gorilla/websocket v1.5.0 h1:PPwGk2jz7EePpoHN/+ClbZu8SPxiqlu12wZP/3sWmnc=
+github.com/gorilla/websocket v1.5.0/go.mod h1:YR8l580nyteQvAITg2hZ9XVh4b55+EU/adAjf1fMHhE=
+github.com/icza/mjpeg v0.0.0-20230330134156-38318e5ab8f4 h1:NUuR3iigoVwstgE2Ahn1O4OuRSK/kYS6YMmrscfbYOs=
+github.com/icza/mjpeg v0.0.0-20230330134156-38318e5ab8f4/go.mod h1:4x2PXnxyG6DTZMYpoV0JgU0y1eZvAfxW/YALnA8E2B0=
+github.com/streadway/amqp v1.1.0 h1:py12iX8XSyI7aN/3dUT8DFIDJazNJsVJdxNVEpnQTZM=
+github.com/streadway/amqp v1.1.0/go.mod h1:WYSrTEYHOXHd0nwFeUXAe2G2hRnQT+deZJJf88uS9Bg=
