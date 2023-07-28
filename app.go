@@ -40,22 +40,40 @@ type audioChunkStruct struct {
 	AudioChunk int    `json:"audiochunk"`
 }
 
+type speechResponse struct {
+	ErrorRegions [][]int
+	Transcript   string
+}
+
+func deleteFile(filePath string) {
+	err := os.Remove(filePath)
+	if err != nil {
+		// If the file doesn't exist, os.Remove will return an error with message "remove path/to/your/file.txt: no such file or directory".
+		// You can check the error to determine if the file didn't exist and ignore the error in that case.
+		fmt.Println("Error deleting file:", err)
+		return
+	}
+}
+
 func main() {
-	http.HandleFunc("/ws", handleWebSocket)
-	log.Fatal(http.ListenAndServe(":8000", nil))
-	log.Println("Speaking Server has started")
+	deleteFile("file.wav")
+	deleteFile("output")
+
+	// log.Println("Speaking Server has started")
+	// http.HandleFunc("/ws", handleWebSocket)
+	// log.Fatal(http.ListenAndServe(":8000", nil))
+
+	// GoogleSpeechToText("output")
 
 	// RabbitMQConnect()
 
 	// start := time.Now()
-	// // pythonTranscribe()
-	// RabbitMQConnect()
+	// testSTT()
 	// elapsed := time.Since(start)
 
 	// fmt.Printf("page took %s", elapsed)
 
 	// start = time.Now()
-	// pythonTranscribe()
 	// // RabbitMQ_SendAudio()
 	// elapsed = time.Since(start)
 
@@ -69,33 +87,41 @@ func main() {
 
 	// userTranscript := pythonTranscribe()
 	// log.Println(userTranscript)
-	// var databaseText string = "People Love to comment on the self made businessman. The person who has come up the hard way. "
-	// userTranscript := "people love to comment on the self made Businessman the person who is come up the Hard Way"
-	// userTranscript := "people love to comment on the self made Businessman the person who has come up the Hard Way"
-	// compareText(databaseText, userTranscript)
+	var databaseText string = "People Love to comment on the self-made businessman. The person who has come up the hard way. "
+	userTranscript := "Transcript Alternatives: 0 people love to comment on the Businessman the person who has come up soft now in stock for the next five to ten seconds in C transcribes world test of speaking and see how well matching algorithm works in can identify extra words given the initial words were correct"
+	// // userTranscript := "people love to comment on the self made Businessman the person who has come up the Hard Way"
+	// userTranscript := "people love to comment on the self-made businessman the person who has come up the soft way mountain people love to comment on the self-made businessman the person who has come up to soft way now I'm going to be continued to talk or think to reach about 30 seconds minute it does means it has been successfully working and yeah let's test if this works"
+	errorRegion := compareText(databaseText, userTranscript)
+	log.Println("errorRegion", errorRegion)
 
 }
 
 func handleEndAudioRecording(savePath string, conn *websocket.Conn) {
 
 	//Convert file
-	outputFilePath := "file.wav"
-	err := convertToWav(savePath, outputFilePath, "00:00:00", "00:00:05")
-	if err != nil {
-		log.Fatal("Failed to convert audio file to wav:", err)
-	}
+	// outputFilePath := "file.wav"
+	// err := convertToWav(savePath, outputFilePath, "00:00:00", "00:00:05")
+	// if err != nil {
+	// 	log.Fatal("Failed to convert audio file to wav:", err)
+	// }
 
-	userTranscript := pythonTranscribe()
+	userTranscript := GoogleSpeechToText(savePath)
 
 	// var databaseText string = "People Love to comment on the self-made businessman. The person who has come up the hard way. This is a person who typically has reached the top without any support of qualifications. And the reason it is so comment-worthy is that it is very hard. A qualification, in whatever field you chose to study, is the foundation that underpins and support your entire career. If your career is a rocket, then the degree or diploma you read for is the launch pad. And in these modern times, you can get qualifications in almost any field. In the old days, it was just the professions like medicine, engineering or law, etc that saw you read for a degree. But now you can study for a diploma of logistics, a Bachelor of media studies or a qualification in retail management. Whatever your chosen field you can almost certainly find a course of study to help launch you on your way."
 	// var userTranscript string = "People to comment on the businessman The person who has come the hard way This is a person who typically has reached the top without any support of qualifications And the reason it is so commentworthy is that it is very hard A qualification in whatever field you chose to study is the foundation that underpins and support your entire career If your career is a rocket then the degree or diploma you read for is the launch pad And in these modern times you can get qualifications in almost any field In the old days it was just the professions like medicine engineering or law etc that saw you read for a degree But now you can study for a diploma of logistics a Bachelor of media studies or a qualification in retail management Whatever your chosen field you can almost certainly find a course of study to help launch you on your way"
 
 	var databaseText string = "People Love to comment on the self made businessman. The person who has come up the hard way. "
+	// var databaseText string = "Online education, also known as e-learning or distance learning, refers to the delivery of educational content and instruction through digital platforms and the internet. It allows students to access courses, resources, and interact with instructors remotely, without the need for physical presence in a traditional classroom setting. Online education has become increasingly popular and widespread, offering numerous benefits and opportunities for learners of all ages and backgrounds. It allows flexibility, easy accessibility, variety of courses and programs, Self-paced learning, cost and time saving.	"
 	// var userTranscript string = "people love to comment on the self made Businessman the person who is come up the Hard Way"
-	ErrorWords := compareText(databaseText, userTranscript)
+	ErrorRegions := compareText(databaseText, userTranscript)
+
+	var tempRes speechResponse = speechResponse{
+		ErrorRegions: ErrorRegions,
+		Transcript:   userTranscript,
+	}
 
 	// Convert string array to JSON
-	jsonData, err := json.Marshal(ErrorWords)
+	jsonData, err := json.Marshal(tempRes)
 	if err != nil {
 		fmt.Println("Error converting string array to JSON:", err)
 		return
@@ -150,10 +176,7 @@ func handleWebSocket(w http.ResponseWriter, r *http.Request) {
 			break
 		}
 
-		log.Println("messageType", messageType)
-
 		if messageType == websocket.TextMessage {
-			log.Println("websocket.TextMessage", messageType, websocketConn[conn])
 
 			var jsonData audioChunkStruct
 			err := json.Unmarshal(wsMessageBytes, &jsonData)
@@ -181,6 +204,25 @@ func handleWebSocket(w http.ResponseWriter, r *http.Request) {
 		} else if messageType == websocket.BinaryMessage {
 			log.Println("websocket.BinaryMessage", websocketConn[conn])
 			appendAudioChunk(wsMessageBytes, websocketConn[conn], savePath)
+			userTranscript := GoogleSpeechToText(savePath)
+
+			var tempRes speechResponse = speechResponse{
+				ErrorRegions: make([][]int, 0),
+				Transcript:   userTranscript,
+			}
+
+			// Convert string array to JSON
+			jsonData, err := json.Marshal(tempRes)
+			if err != nil {
+				fmt.Println("Error converting string array to JSON:", err)
+				return
+			}
+
+			// Send JSON-encoded string array to the client
+			err = conn.WriteMessage(websocket.TextMessage, jsonData)
+			if err != nil {
+				fmt.Println("Error sending message:", err)
+			}
 		}
 
 	}

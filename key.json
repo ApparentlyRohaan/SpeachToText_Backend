@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "sublime-calling-376721",
+  "private_key_id": "50e08417dbf8f1cf2d6c7f3cb7f035e8a079d166",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCyxi+EaWVEymzV\npFZC1v0TYeR+CfMqjRcGeNKn5gt3K0SsVkMDTkfFDBHybb106J1vGcY2hRhcS7gz\nRjDXvYElbEtpd70o9/Y9RroC09SOW5jFp8lMTk+XOS6ZdCSTPJvggwiuijp8mVqX\nxQ6is0qN3U01NHXciVQcSee5F0DaAkyQyGaohk+cRwoJWbY6WcB0CXlIkLC7AcmE\nOxxR2jq/yXW8buB7ngKlOdKs6CLU4sRpEPuieboDKDfSr8s4isBGedk+yEZB9XcM\nlYzYlGXibdBjKaVmHjoR02+SOg3w1t+fDawzMx2+/+dqgsf8HwkOP9VYINluC+mz\npMv85fIzAgMBAAECggEAUbPooIPIj/VRYxxNfhOiKrsJAZ9Lfi1oEgGjCK/Gmqpw\nIrDzxG2AuGnpQ9nqhaUP2mg1odIXDYtffjN8fAS0IqXJG0TpcvFMHLoXpdYo5Pyw\np9ikU1bQ4iR0ixY85vuCo8tO6vHqg+pUMFuTckEteANlV0UH/ofWpG0UVY9uiJNS\n5n/dHu8NJbQmv3xGkGAYKy72JiuuVmlF0ieY4Pj0n9E/VT4YGsSbixD8Ul/53rGL\nDSq84KlRtCVGhRJfYYSYndnUngwHpHvuJM9dsipw+7F0bDedcbX6WYIeRMsAcVvI\nx+6LR8XctzOyD2AFd1jcQ1HTaUqsGc4Ck0xHywtaVQKBgQDsU8PzLwI9P3cEwsMe\nb0hSYmFMDOmza6Ot60SoITbRCL1a8ZxGs6ffp0LJBszE8Wsx5MFHrBzllxb4/QbB\nOYE0c9RFr8HRu41T9KOEax11wkKRGqc6de74aJpQBvHJqac92g0WQdetgxvx5wga\n8YgeVM7qAHbTZhJzM5PVHdzwBQKBgQDBp/CjQ3ZV9JyY2pyk1tPeZKyfZWx2elms\nky1PJ5NTjeBy5GIvg/raIEgUFgvgkZpr1tTkkiQtFzCnoe35++0jebOIv2I8tS4x\n4eBGspWQwEmbDorW7b67k+Tc79drwjDBMhDANtyEgMKIfWN/V0Nid+r5lLubILr3\nlusWPItG1wKBgGrV12CJYM7FcQ2i6khI8H3l4axarg+hWoZWNFx5X2mSNN/3F7nS\nn9J4r7VnMIzbwqT0j/fRs+KKsiTvZe1WDLXkoxK5yLoCuno4vu8u6UuB/UvRq8W+\n6MA9sXz6FrYezu8kMwRb0Z+sBKcP1Vcw12M23a9ldFJO84pGx87xSB7tAoGAJ0PN\n3syG6da3CacJq8KDIsx207rUyxDzrbIJtcrobECQCbuUzN2NtzxkYO43akkbblIY\nyF95Rks1akfC4LTb2B2M8WUcngJ+Y07REoSTHs5eHjpMnFeIHLBX7xQSMZ8mE4X7\nL33wKE2TI+mIiwE+gHCgDArEHyf7wMew0slj0/ECgYB6GlBHUqfTqK6RIpI5xP9c\nUV+T6xbioowtQ8c6Rv3rWia0rlPMvz2qD7tNpuctSB0t/q24WFoBpniUVkldn6XX\nzZxoRgvn9Gs6RqtYVpuea/Ap4pcswJOzJ8tLB10pQevxXI6AnbVFFqA5IwPqSYGK\n+ni4RSZmrN91uMAvRTh4kA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "my-speech-service-account@sublime-calling-376721.iam.gserviceaccount.com",
+  "client_id": "103564859049464095153",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/my-speech-service-account%40sublime-calling-376721.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
